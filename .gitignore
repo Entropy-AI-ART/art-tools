@@ -1,0 +1,39 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+
+# Vim swap files
+*.swp
+*.swo
+
+# OS Files
+.DS_Store
+
+# Distribution / packaging
+node_modules/
+npm-debug.log
+
+# pyenv local version file
+.python-version
+
+# App ignores
+build/
+tmp/
+.idea/
+venv/
+src/
+
+logs
+.vscode/launch.json
+.vscode/settings.json
+.cache/
+
+.coverage
+.coverage_report
+coverage.xml
+test_result.xml
+quality-diff.html
+htmlcov/
+.pytest_cache/
+.env_test
+.venv
