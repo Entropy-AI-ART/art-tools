@@ -1,0 +1,13 @@
+version: '0.1'
+services:
+  art_server:
+    restart: always
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    ports:
+      - "5000:5000"
+    environment:
+      PYTHONUNBUFFERED: 0
+    volumes:
+      - ./:/

@@ -87,7 +87,7 @@ def absolute_name_scope(scope: str) -> tf.name_scope:
 
 def absolute_variable_scope(scope: str, **kwargs) -> tf.variable_scope:
     """Forcefully enter the specified variable scope, ignoring any surrounding scopes."""
-    return tf.variable_scope(tf.VariableScope(name=scope, **kwargs), auxiliary_name_scope=False)
+    return tf.variable_scope(tf.VariableScope(name=scope, **kwargs), auxiliary_name_scope=False, reuse=tf.AUTO_REUSE)
 
 
 def _sanitize_tf_config(config_dict: dict = None) -> dict:
@@ -114,7 +114,7 @@ def _sanitize_tf_config(config_dict: dict = None) -> dict:
     return cfg
 
 
-def init_tf(config_dict: dict = None) -> None:
+def init_tf(config_dict: dict = None) -> any:
     """Initialize TensorFlow session using good default settings."""
     # Skip if already initialized.
     if tf.get_default_session() is not None:
@@ -139,7 +139,7 @@ def init_tf(config_dict: dict = None) -> None:
             os.environ[fields[1]] = str(value)
 
     # Create default TensorFlow session.
-    create_session(cfg, force_as_default=True)
+    return create_session(cfg, force_as_default=True)
 
 
 def assert_tf_initialized():
