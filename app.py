@@ -83,9 +83,9 @@ matrix.load_state_dict(torch.load(map_location=torch.device('cpu'), f='models/r4
 
 @app.route('/fusion', methods=['POST'])
 def fusion():
-    data = request.get_data()
+    data = request.files.get('uploadImage').stream
     try:
-        upload = PIL.Image.open(BytesIO(data)).convert('RGB')
+        upload = PIL.Image.open(data).convert('RGB')
     except Exception:
         return 'Not an image', 400
     file_name = request.headers.get('filename')
