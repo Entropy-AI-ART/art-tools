@@ -76,10 +76,15 @@ style_v = torch.Tensor(1, 3, 1024, 1024)
 vgg = Encoder4()
 dec = Decoder4()
 matrix = MulLayer('r41')
-vgg.load_state_dict(torch.load(map_location=torch.device('cpu'), f='models/vgg_r41.pth'))
-dec.load_state_dict(torch.load(map_location=torch.device('cpu'), f='models/dec_r41.pth'))
-matrix.load_state_dict(torch.load(map_location=torch.device('cpu'), f='models/r41.pth'))
+vgg.load_state_dict(torch.load(f='models/vgg_r41.pth'))
+dec.load_state_dict(torch.load(f='models/dec_r41.pth'))
+matrix.load_state_dict(torch.load(f='models/r41.pth'))
 
+vgg.cuda()
+dec.cuda()
+matrix.cuda()
+content_v = content_v.cuda()
+style_v = style_v.cuda()
 
 @app.route('/fusion', methods=['POST'])
 def fusion():
