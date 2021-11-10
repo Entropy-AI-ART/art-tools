@@ -71,8 +71,8 @@ def gen_art():
         [f'art_{id}.png'],
     ])
 
-content_v = torch.Tensor(1, 3, 256, 256)
-style_v = torch.Tensor(1, 3, 256, 256)
+content_v = torch.Tensor(1, 3, 1024, 1024)
+style_v = torch.Tensor(1, 3, 1024, 1024)
 vgg = Encoder4()
 dec = Decoder4()
 matrix = MulLayer('r41')
@@ -91,12 +91,12 @@ def fusion():
     file_name = request.headers.get('filename')
     gen_image = PIL.Image.open(file_name).convert('RGB')
 
-    content_dataset = Dataset(upload, 256, 256, test=True)
+    content_dataset = Dataset(upload, 1024, 1024, test=True)
     content_loader = torch.utils.data.DataLoader(dataset=content_dataset,
                                                  batch_size=1,
                                                  shuffle=False,
                                                  num_workers=1)
-    style_dataset = Dataset(gen_image, 256, 256, test=True)
+    style_dataset = Dataset(gen_image, 1024, 1024, test=True)
     style_loader = torch.utils.data.DataLoader(dataset=style_dataset,
                                                batch_size=1,
                                                shuffle=False,
