@@ -1,3 +1,4 @@
+from http import HTTPStatus
 from uuid import uuid4
 from io import BytesIO
 import base64
@@ -124,3 +125,7 @@ def fusion():
                 encode_img(image),
                 [f'fusion_{file_name}'],
             ])
+
+@app.route('/health', methods=['GET'])
+def check_health():
+    return jsonify({'message': 'healthy'}), HTTPStatus.OK
